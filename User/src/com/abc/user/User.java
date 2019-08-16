@@ -37,12 +37,17 @@ public class User extends HttpServlet {
 		String name = request.getParameter("name");
 		String birthday = request.getParameter("birthday");
 		String gender = request.getParameter("gender");
-		String habits = request.getParameter("habits");
+		String hobbies[] = request.getParameter("hobbies").split("\\s|\\n|,|¡B|¡A");
 		
 		writer.println("name: " + name + "<br>");
 		writer.println("birthday: " + birthday + "<br>");
 		writer.println("gender: " + gender + "<br>");
-		writer.println("habits: " + habits + "<br>");
+		writer.println("hobbies: ");
+		
+		for(int i = 0 ; i < hobbies.length ; i++) {
+			writer.println(hobbies[i]);
+		}
+		 
 		writer.close();
 	}
 
