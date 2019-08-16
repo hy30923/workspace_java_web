@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+	.Content {
+	
+        width: 100%;
+        line-height: 40px;
+    }
+
+	.AlignRight {
+	
+        text-align: right;
+    }
+    
+    .Title {
+    
+        float: left;
+        width: 5%;
+        margin-right: 20px;
+    }
+    
+	.Label {
+	
+        float: left;
+        width: 5%;
+        margin-right: 20px;
+    }
+	
+	.Input {
+	
+		float: left;
+		width: 25%;
+	}
+	
+	.Submit {
+	
+		clear: both;
+	}
+</style>
+</head>
+<body>
+<form action="User" method="get">
+	<div class="Content">
+		<div class="Title">
+			<div class="AlignRight">
+				<div class="Label">
+					<label>Name:</label><br>
+					<label>Birthday:</label><br>
+					<label>Gender:</label><br>
+					<label>Hobbies:</label><br>
+				</div>
+			</div>
+		</div>
+		<div class="Input">
+			<input type="text" name="name" autocomplete="off" required><br>
+			<input type="date" name="birthday" required><br>
+			<input type="radio" name="gender" value="male">Male<input type="radio" name="gender" value="female">Female<br>
+			<textarea name="hobbies" required></textarea><br>
+		</div>
+	</div>
+	<div class="Submit"><input type="submit" value="Submit"></div>
+</form>
+</body>
+</html>
