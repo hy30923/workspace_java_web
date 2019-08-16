@@ -149,7 +149,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="HelloWeb" path="/HelloWeb" reloadable="true" source="org.eclipse.jst.jee.server:HelloWeb"/><Context docBase="Hello" path="/Hello" reloadable="true" source="org.eclipse.jst.jee.server:Hello"/><Context docBase="Triangle" path="/Triangle" reloadable="true" source="org.eclipse.jst.jee.server:Triangle"/><Context docBase="jsp-servlet-jdbc-mysql-crud-tutorial-master" path="/jsp-servlet-jdbc-mysql-crud-tutorial-master" reloadable="true" source="org.eclipse.jst.jee.server:jsp-servlet-jdbc-mysql-crud-tutorial-master"/></Host>
+      <Context docBase="HelloWeb" path="/HelloWeb" reloadable="true" source="org.eclipse.jst.jee.server:HelloWeb"/><Context docBase="Hello" path="/Hello" reloadable="true" source="org.eclipse.jst.jee.server:Hello"/><Context docBase="Triangle" path="/Triangle" reloadable="true" source="org.eclipse.jst.jee.server:Triangle"/><Context docBase="jsp-servlet-jdbc-mysql-crud-tutorial-master" path="/jsp-servlet-jdbc-mysql-crud-tutorial-master" reloadable="true" source="org.eclipse.jst.jee.server:jsp-servlet-jdbc-mysql-crud-tutorial-master"/><Context docBase="Triangle2" path="/Triangle2" reloadable="true" source="org.eclipse.jst.jee.server:Triangle2"/><Context docBase="Sum" path="/Sum" reloadable="true" source="org.eclipse.jst.jee.server:Sum"/><Context docBase="User" path="/User" reloadable="true" source="org.eclipse.jst.jee.server:User"/></Host>
     </Engine>
   </Service>
 </Server>
