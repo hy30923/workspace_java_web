@@ -1,6 +1,7 @@
 package com.abc.userdispatch;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,20 +28,20 @@ public class UserDispatch extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
-		/*
+		
+		PrintWriter writer = response.getWriter();
+		
 		String name = request.getParameter("name");
 		String birthday = request.getParameter("birthday");
 		String gender = request.getParameter("gender");
 		String hobbies[] = request.getParameter("hobbies").split("\\s|\\n|,|¡B|¡A");
-		*/
-		response.sendRedirect("https://pchome.com.tw/");
-		/*
+		
 		if(gender.equals("male")) {
 			
-			
+			response.sendRedirect("https://www.pchome.com.tw");
 		}
 		
 		else if(gender.equals("female")){
@@ -50,8 +51,7 @@ public class UserDispatch extends HttpServlet {
 		
 		else {
 			
-			response.sendRedirect("https://www.google.com/");
-		}*/
+		}
 	}
 
 	/**
