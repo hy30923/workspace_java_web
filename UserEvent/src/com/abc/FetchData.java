@@ -2,6 +2,9 @@ package com.abc;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,21 +12,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Counter
+ * Servlet implementation class FetchData
  */
-@WebServlet("/Counter")
-public class Counter extends HttpServlet {
+@WebServlet("/FetchData")
+public class FetchData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Counter() {
+    public FetchData() {
         super();
-        // TODO Auto-generated constructor stub        
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,21 +37,23 @@ public class Counter extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		ServletContext context = getServletContext();
-		Integer count = (Integer) context.getAttribute("counter");
-		if(count == null) {
+		try {
 			
-			count = Integer.valueOf(1);
-			context.setAttribute("counter", count);
-		}
-		
-		else {
+			ServletContext ctx = getServletContext();
+			Connection con = (Connection) ctx.getAttribute("mycon");
+			PreparedStatement ps = con.prepareStatement("select * from employee", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			ResultSet rs = ps.executeQuery();
 			
-			count = Integer.valueOf(count.intValue() + 1);
-			context.setAttribute("counter", count);
+			out.print("<table border=1><tr><th>ID</th><th>Age</th><th>First Name</th><th>Last Name</th></tr>");
+			while(rs.next()) {
+				
+				out.print("<tr><td>" + rs.getString(1) + "</td>" + "<td>" + rs.getString(2) + "</td>" + "<td>" + rs.getString(3) + "</td>" + "<td>" + rs.getString(4)+ "</td></tr>");
+			}
+			out.print("</table>");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		
-		out.print(count);
 	}
 
 	/**
@@ -59,4 +63,5 @@ public class Counter extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

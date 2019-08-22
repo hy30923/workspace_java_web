@@ -3,27 +3,25 @@ package com.abc;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Counter
+ * Servlet implementation class HomePage
  */
-@WebServlet("/Counter")
-public class Counter extends HttpServlet {
+@WebServlet("/HomePage")
+public class HomePage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Counter() {
+    public HomePage() {
         super();
-        // TODO Auto-generated constructor stub        
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,21 +33,7 @@ public class Counter extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		ServletContext context = getServletContext();
-		Integer count = (Integer) context.getAttribute("counter");
-		if(count == null) {
-			
-			count = Integer.valueOf(1);
-			context.setAttribute("counter", count);
-		}
-		
-		else {
-			
-			count = Integer.valueOf(count.intValue() + 1);
-			context.setAttribute("counter", count);
-		}
-		
-		out.print(count);
+		out.print("Login successfully!!");
 	}
 
 	/**
@@ -59,4 +43,5 @@ public class Counter extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

@@ -3,7 +3,6 @@ package com.abc;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,18 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Counter
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet("/Counter")
-public class Counter extends HttpServlet {
+@WebServlet("/LogoutServlet")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Counter() {
+    public LogoutServlet() {
         super();
-        // TODO Auto-generated constructor stub        
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,21 +34,14 @@ public class Counter extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		ServletContext context = getServletContext();
-		Integer count = (Integer) context.getAttribute("counter");
-		if(count == null) {
+		HttpSession session = request.getSession();
+		if(session != null) {
 			
-			count = Integer.valueOf(1);
-			context.setAttribute("counter", count);
+			session.invalidate();
 		}
 		
-		else {
-			
-			count = Integer.valueOf(count.intValue() + 1);
-			context.setAttribute("counter", count);
-		}
-		
-		out.print(count);
+		out.print("You are successfully logged out");
+		out.close();
 	}
 
 	/**
@@ -59,4 +51,5 @@ public class Counter extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

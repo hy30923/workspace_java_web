@@ -11,19 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import sun.rmi.log.LogOutputStream;
+
 /**
- * Servlet implementation class Counter
+ * Servlet implementation class FirstServlet
  */
-@WebServlet("/Counter")
-public class Counter extends HttpServlet {
+@WebServlet("/FirstServlet")
+public class FirstServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Counter() {
+    public FirstServlet() {
         super();
-        // TODO Auto-generated constructor stub        
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,21 +37,19 @@ public class Counter extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		ServletContext context = getServletContext();
-		Integer count = (Integer) context.getAttribute("counter");
-		if(count == null) {
-			
-			count = Integer.valueOf(1);
-			context.setAttribute("counter", count);
-		}
+		String n = request.getParameter("username");
+		out.print("Welcome " + n);
+		HttpSession session = request.getSession();
+		session.setAttribute("uname", n);
 		
-		else {
-			
-			count = Integer.valueOf(count.intValue() + 1);
-			context.setAttribute("counter", count);
-		}
+		ServletContext ctx = getServletContext();
+		int t = (Integer) ctx.getAttribute("totalusers");
+		int c = (Integer) ctx.getAttribute("currentusers");
 		
-		out.print(count);
+		out.print("<br>total users = " + t);
+		out.print("<br>current users = " + c);
+		out.print("<br><a href=\"LogoutServlet\">logout</a>");
+		out.close();
 	}
 
 	/**
@@ -59,4 +59,5 @@ public class Counter extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

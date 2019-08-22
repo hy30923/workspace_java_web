@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="HomePage" method="get">
+Account:<input type="text" name="account" maxlength="10" autocomplete="off" /></br>
+Password:<input type="password" name="password" maxlength="20" autocomplete="off" /></br>
+Verify number:<input type="text" name="number" maxlength="4" autocomplete="off" onkeyup="value=value.replace(/[^\d]/g,'')" style="width: 35px;"/>
+<input type="hidden" id="correct_number" name="correct_number"><div id="verifyNumber"></div>
+<script src="verifyGenerator.js"></script>
+<input type="submit" value="Login" />
+</form>
+</body>
+</html>

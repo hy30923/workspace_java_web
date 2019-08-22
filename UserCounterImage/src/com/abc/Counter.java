@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.org.apache.xpath.internal.axes.ReverseAxesWalker;
+
 /**
  * Servlet implementation class Counter
  */
@@ -49,7 +51,7 @@ public class Counter extends HttpServlet {
 			context.setAttribute("counter", count);
 		}
 		
-		out.print(count);
+		showImage(out, count);
 	}
 
 	/**
@@ -58,5 +60,14 @@ public class Counter extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	private void showImage(PrintWriter out, int num) {
+		
+		String str = Integer.toString(num);
+		for(int i = 0 ; i < str.length() ; i++){
+			
+			out.print("<img src=" + str.charAt(i) + ".jpg>");
+		}
 	}
 }
