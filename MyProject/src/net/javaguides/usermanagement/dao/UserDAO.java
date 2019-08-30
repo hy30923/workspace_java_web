@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.abc.config.Config;
+
 import net.javaguides.usermanagement.model.User;
 
 /**
@@ -19,8 +21,8 @@ import net.javaguides.usermanagement.model.User;
  */
 public class UserDAO {
 	private String jdbcURL = "jdbc:mysql://localhost:3306/demo?useSSL=false&serverTimezone=CST";
-	private String jdbcUsername = "root";
-	private String jdbcPassword = "qaz1234567";
+	private String jdbcUsername = Config.DB_ACCOUNT;
+	private String jdbcPassword = Config.DB_PASSWORD;
 
 	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, email, country) VALUES "
 			+ " (?, ?, ?);";

@@ -20,7 +20,7 @@ import com.mysql.cj.Session;
 /**
  * Servlet Filter implementation class VerifyAccount
  */
-@WebFilter("/UserServlet")
+@WebFilter("/ListServlet")
 public class _2_VerifyAccount implements Filter {
 
 	ArrayList<String> logged_accounts = new ArrayList<String>();
@@ -61,7 +61,7 @@ public class _2_VerifyAccount implements Filter {
 					"alert(\"This account has been logged in!!\")\r\n" + 
 					"</script>");
 			
-			request.getRequestDispatcher("index.html").include(request, response);
+			request.getRequestDispatcher("index.jsp").include(request, response);
 		}
 			
 		else if(password.equals("admin123")) {
@@ -77,7 +77,7 @@ public class _2_VerifyAccount implements Filter {
 		else {
 			
 			out.print("<div align=\"center\">Wrong account or password!!</div>");		
-			request.getRequestDispatcher("index.html").include(request, response);
+			request.getRequestDispatcher("index.jsp").include(request, response);
 		}
 	}
 

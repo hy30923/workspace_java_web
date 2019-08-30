@@ -14,7 +14,7 @@ import javax.servlet.annotation.WebFilter;
 /**
  * Servlet Filter implementation class VerifyNumber
  */
-@WebFilter("/UserServlet")
+@WebFilter("/ListServlet")
 public class _1_VerifyNumber implements Filter {
 
     /**
@@ -52,7 +52,7 @@ public class _1_VerifyNumber implements Filter {
 		else {
 			
 			out.print("<div align=\"center\">Wrong verify number!</div>");
-			request.getRequestDispatcher("index.html").include(request, response);
+			request.getRequestDispatcher("index.jsp").include(request, response);
 		}
 	}
 

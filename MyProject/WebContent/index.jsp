@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="CSS/main.css" />
 </head>
 <body>
-<form action="UserServlet" method="post">
+<form action="ListServlet" method="post">
 	<div align="center">
 		Account:<input type="text" name="account" maxlength="20" value="hy30923" autocomplete="off" style="width: 250px;" /><br/>
 		Password:<input type="password" name="password" maxlength="20" value="admin123" autocomplete="off" style="width: 250px;" /><br/>

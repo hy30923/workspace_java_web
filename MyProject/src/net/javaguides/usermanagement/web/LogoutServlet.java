@@ -44,7 +44,7 @@ public class LogoutServlet extends HttpServlet {
 		ServletContext context = request.getServletContext();
 		ArrayList<String> logged_accounts = (ArrayList<String>) context.getAttribute("logged_accounts");
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		if(session != null && logged_accounts != null) {
 			
 			String account = (String) session.getAttribute("logged_account");
@@ -53,12 +53,12 @@ public class LogoutServlet extends HttpServlet {
 			context.setAttribute("logged_accounts", logged_accounts);
 			session.invalidate();
 
-			request.getRequestDispatcher("index.html").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		
 		else {
 
-			request.getRequestDispatcher("index.html").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 
