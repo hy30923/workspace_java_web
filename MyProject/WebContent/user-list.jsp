@@ -14,7 +14,7 @@
         	&nbsp;&nbsp;&nbsp;
         	<a href="list">List All Users</a>
         	&nbsp;&nbsp;&nbsp;
-        	<a href="Logout">Logout</a>
+        	<a href="logout">Logout</a>
         </h2>
 	</center>
     <div align="center">

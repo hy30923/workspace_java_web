@@ -41,7 +41,7 @@
             <tr>
                 <th>User Name: </th>
                 <td>
-                	<input type="text" name="name" size="45"
+                	<input type="text" name="name" size="45" autocomplete="off" 
                 			value="<c:out value='${user.name}' />"
                 		/>
                 </td>
@@ -49,7 +49,7 @@
             <tr>
                 <th>User Email: </th>
                 <td>
-                	<input type="text" name="email" size="45"
+                	<input type="text" name="email" size="45" autocomplete="off" 
                 			value="<c:out value='${user.email}' />"
                 	/>
                 </td>
@@ -57,7 +57,7 @@
             <tr>
                 <th>Country: </th>
                 <td>
-                	<input type="text" name="country" size="15"
+                	<input type="text" name="country" size="15" autocomplete="off"
                 			value="<c:out value='${user.country}' />"
                 	/>
                 </td>

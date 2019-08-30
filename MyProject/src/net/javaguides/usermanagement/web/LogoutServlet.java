@@ -1,4 +1,4 @@
-package com.abc;
+package net.javaguides.usermanagement.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
+
+import net.javaguides.usermanagement.web.UserServlet;
 
 /**
  * Servlet implementation class logoutServlet
@@ -32,6 +34,7 @@ public class LogoutServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
@@ -39,19 +42,18 @@ public class LogoutServlet extends HttpServlet {
 		PrintWriter	out = response.getWriter();
 		
 		ServletContext context = request.getServletContext();
-		@SuppressWarnings("unchecked")
 		ArrayList<String> logged_accounts = (ArrayList<String>) context.getAttribute("logged_accounts");
 		
 		HttpSession session = request.getSession();
-		if(session != null) {
+		if(session != null && logged_accounts != null) {
 			
-		String account = (String) session.getAttribute("logged_account");
-		logged_accounts.remove(account);
-		System.out.println(account);
-		context.setAttribute("logged_accounts", logged_accounts);
-		session.invalidate();
-		
-		request.getRequestDispatcher("index.html").forward(request, response);
+			String account = (String) session.getAttribute("logged_account");
+			logged_accounts.remove(account);
+			System.out.println(account);
+			context.setAttribute("logged_accounts", logged_accounts);
+			session.invalidate();
+
+			request.getRequestDispatcher("index.html").forward(request, response);
 		}
 		
 		else {

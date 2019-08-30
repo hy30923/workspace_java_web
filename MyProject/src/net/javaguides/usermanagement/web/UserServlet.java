@@ -21,7 +21,7 @@ import net.javaguides.usermanagement.model.User;
  * @email Ramesh Fadatare
  */
 
-@WebServlet("/UserServlet")
+@WebServlet("/")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserDAO userDAO;
@@ -39,6 +39,7 @@ public class UserServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String action = request.getServletPath();
 		System.out.println(action);
+		
 		try {
 			switch (action) {
 			case "/new":
@@ -55,9 +56,6 @@ public class UserServlet extends HttpServlet {
 				break;
 			case "/update":
 				updateUser(request, response);
-				break;
-			case "/login":
-				loginAction(request, response);
 				break;
 			case "/logout":
 				logoutAction(request, response);
@@ -79,12 +77,6 @@ public class UserServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void loginAction(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
-		request.getRequestDispatcher("login.jsp").forward(request, response);
-	}
-	
 	private void logoutAction(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		

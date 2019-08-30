@@ -1,4 +1,4 @@
-package com.abc;
+package net.javaguides.usermanagement.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +20,7 @@ import com.mysql.cj.Session;
 /**
  * Servlet Filter implementation class VerifyAccount
  */
-@WebFilter("/LoginServlet")
+@WebFilter("/UserServlet")
 public class _2_VerifyAccount implements Filter {
 
 	ArrayList<String> logged_accounts = new ArrayList<String>();
@@ -75,10 +75,8 @@ public class _2_VerifyAccount implements Filter {
 		}
 		
 		else {
-			out.print("<script>\r\n" + 
-					"alert(\"Wrong account or password!!\")\r\n" + 
-					"</script>");
 			
+			out.print("<div align=\"center\">Wrong account or password!!</div>");		
 			request.getRequestDispatcher("index.html").include(request, response);
 		}
 	}

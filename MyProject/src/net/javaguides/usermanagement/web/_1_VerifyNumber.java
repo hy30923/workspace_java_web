@@ -1,4 +1,4 @@
-package com.abc;
+package net.javaguides.usermanagement.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +14,7 @@ import javax.servlet.annotation.WebFilter;
 /**
  * Servlet Filter implementation class VerifyNumber
  */
-@WebFilter("/LoginServlet")
+@WebFilter("/UserServlet")
 public class _1_VerifyNumber implements Filter {
 
     /**
