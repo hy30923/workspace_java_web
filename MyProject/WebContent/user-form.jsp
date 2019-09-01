@@ -10,7 +10,7 @@
 	<center>
 		<h1>User Management</h1>
         <h2>
-        	<a href="InsertServlet">Add New User</a>
+        	<a href="ShowNewFormServlet">Add New User</a>
         	&nbsp;&nbsp;&nbsp;
         	<a href="ListServlet">List All Users</a>
         	&nbsp;&nbsp;&nbsp;
@@ -19,7 +19,7 @@
 	</center>
     <div align="center">
 		<c:if test="${user != null}">
-			<form action="update" method="post">
+			<form action="UpdateUserServlet" method="post">
         </c:if>
         <c:if test="${user == null}">
 			<form action="InsertServlet" method="post">

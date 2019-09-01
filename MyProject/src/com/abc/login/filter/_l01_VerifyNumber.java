@@ -1,4 +1,4 @@
-package net.javaguides.usermanagement.web;
+package com.abc.login.filter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,16 +11,19 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
+import com.abc.config.Config;
+import com.abc.config.ERROR;
+
 /**
  * Servlet Filter implementation class VerifyNumber
  */
-@WebFilter("/ListServlet")
-public class _1_VerifyNumber implements Filter {
+@WebFilter("/LoginServlet")
+public class _l01_VerifyNumber implements Filter {
 
     /**
      * Default constructor. 
      */
-    public _1_VerifyNumber() {
+    public _l01_VerifyNumber() {
         // TODO Auto-generated constructor stub
     }
 
@@ -45,13 +48,13 @@ public class _1_VerifyNumber implements Filter {
 		String correct_number = request.getParameter("correct_number");
 		
 		if(number.equals(correct_number)) {
-			
+
 			chain.doFilter(request, response);
 		}
 		
 		else {
 			
-			out.print("<div align=\"center\">Wrong verify number!</div>");
+			out.print("<div align='center'>"+ ERROR.ERR_VERIFY_NUMBER + "</div>");
 			request.getRequestDispatcher("index.jsp").include(request, response);
 		}
 	}

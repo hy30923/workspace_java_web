@@ -19,4 +19,16 @@
 		<exception-type>java.lang.Exception</exception-type>
 		<location>/Error.jsp</location>
 	</error-page>
+	<servlet>
+		<servlet-name>UploadPhotoServlet</servlet-name>
+		<servlet-class>net.javaguides.usermanagement.web.UploadPhotoServlet</servlet-class>
+		<init-param>
+			<param-name>savePath</param-name>
+			<param-value>uploads</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadPhotoServlet</servlet-name>
+		<url-pattern>/UploadPhotoServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

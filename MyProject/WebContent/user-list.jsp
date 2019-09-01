@@ -22,21 +22,27 @@
             <caption><h2>List of Users</h2></caption>
             <tr>
                 <th>ID</th>
+                <th>Photo</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Country</th>
                 <th>Actions</th>
+                <th>Upload photo</th>
             </tr>
             <c:forEach var="user" items="${listUser}">
                 <tr>
                     <td><c:out value="${user.id}" /></td>
+                    <td><img src="../metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MyProject/upload/images/<c:out value='${user.id}' />.jpg" style="weight:100px; height:100px;"></td>
                     <td><c:out value="${user.name}" /></td>
                     <td><c:out value="${user.email}" /></td>
                     <td><c:out value="${user.country}" /></td>
                     <td>
-                    	<a href="edit?id=<c:out value='${user.id}' />">Edit</a>
+                    	<a href="ShowEditFormServlet?id=<c:out value='${user.id}' />">Edit</a>
                     	&nbsp;&nbsp;&nbsp;&nbsp;
-                    	<a href="delete?id=<c:out value='${user.id}' />">Delete</a>                    	
+                    	<a href="DeleteServlet?id=<c:out value='${user.id}' />">Delete</a>
+                   	</td>
+                   	<td>
+                    	<form action="UploadPhotoServlet" method="post" enctype="multipart/form-data"><input name="file" type="file" size="20"><input type="hidden" name="id" value="<c:out value='${user.id}' />"><input type="submit" value="upload" /></form>         	
                     </td>
                 </tr>
             </c:forEach>

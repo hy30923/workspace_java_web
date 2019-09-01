@@ -2,37 +2,33 @@ package net.javaguides.usermanagement.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.abc.config.ERROR;
-
-import net.javaguides.usermanagement.dao.UserDAO;
-import net.javaguides.usermanagement.model.User;
+import net.javaguides.usermanagement.dao.AccDAO;
+import net.javaguides.usermanagement.model.Account;
 
 /**
- * Servlet implementation class ListUser
+ * Servlet implementation class RegisterServlet
  */
-@WebServlet("/ListServlet")
-public class ListServlet extends HttpServlet {
+@WebServlet("/RegisterServlet")
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserDAO userDAO;   
+	private AccDAO accDAO;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListServlet() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
-        userDAO = new UserDAO();
+        accDAO = new AccDAO();
     }
-    	
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,23 +39,20 @@ public class ListServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		HttpSession session = request.getSession(false);
-		if((String) session.getAttribute("logged_account") == null) {
-			
-			out.print("<script>alert("+ ERROR.ERR_NOT_LOGIN +")</script>");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+		String account = request.getParameter("account");
+		String password = request.getParameter("password");
+
+		try {
+			System.out.println(account + password);
+			accDAO.insertAccount(new Account(account, password));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		else {
-		
-			System.out.println("session id " + session.getId());
-			System.out.println("in session account " + session.getAttribute("logged_account"));
-			List<User> listUser = userDAO.selectAllUsers();
-			request.setAttribute("listUser", listUser);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
-			dispatcher.forward(request, response);
-		}
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

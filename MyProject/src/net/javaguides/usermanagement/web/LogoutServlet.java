@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
 
-import net.javaguides.usermanagement.web.UserServlet;
-
 /**
  * Servlet implementation class logoutServlet
  */
@@ -49,7 +47,7 @@ public class LogoutServlet extends HttpServlet {
 			
 			String account = (String) session.getAttribute("logged_account");
 			logged_accounts.remove(account);
-			System.out.println(account);
+			System.out.println(account + " logout");
 			context.setAttribute("logged_accounts", logged_accounts);
 			session.invalidate();
 
@@ -57,7 +55,8 @@ public class LogoutServlet extends HttpServlet {
 		}
 		
 		else {
-
+			
+			System.out.println("no account logout...");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}

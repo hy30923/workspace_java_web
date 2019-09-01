@@ -11,7 +11,8 @@ public class User {
 	protected String name;
 	protected String email;
 	protected String country;
-	
+	protected String photo;
+
 	public User() {
 	}
 	
@@ -53,5 +54,11 @@ public class User {
 	}
 	public void setCountry(String country) {
 		this.country = country;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 }

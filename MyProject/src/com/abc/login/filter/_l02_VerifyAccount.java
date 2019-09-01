@@ -1,4 +1,4 @@
-package net.javaguides.usermanagement.web;
+package com.abc.login.filter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,21 +15,27 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.abc.config.Config;
+import com.abc.config.ERROR;
 import com.mysql.cj.Session;
+
+import net.javaguides.usermanagement.dao.AccDAO;
+import net.javaguides.usermanagement.model.Account;
 
 /**
  * Servlet Filter implementation class VerifyAccount
  */
-@WebFilter("/ListServlet")
-public class _2_VerifyAccount implements Filter {
+@WebFilter("/LoginServlet")
+public class _l02_VerifyAccount implements Filter {
 
 	ArrayList<String> logged_accounts = new ArrayList<String>();
-	
+	AccDAO accDAO;
     /**
      * Default constructor. 
      */
-    public _2_VerifyAccount() {
+    public _l02_VerifyAccount() {
         // TODO Auto-generated constructor stub
+    	accDAO = new AccDAO();
     }
 
 	/**
@@ -54,30 +60,34 @@ public class _2_VerifyAccount implements Filter {
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
 		
-		// pass the request along the filter chain
-		if(password.equals("admin123") && !logged_accounts.isEmpty() && logged_accounts.contains(account)){
-			
-			out.print("<script>\r\n" + 
-					"alert(\"This account has been logged in!!\")\r\n" + 
-					"</script>");
-			
-			request.getRequestDispatcher("index.jsp").include(request, response);
-		}
-			
-		else if(password.equals("admin123")) {
-			
-			HttpSession session = ((HttpServletRequest) request).getSession();
-			
-			logged_accounts.add(account);
-			context.setAttribute("logged_accounts", logged_accounts);
-			session.setAttribute("logged_account", account);
-			chain.doFilter(request, response);	
-		}
+		ArrayList<Account> accounts = (ArrayList<Account>) accDAO.selectAllUsers();
 		
-		else {
+		// pass the request along the filter chain
+		for(int i = 0 ; i < accounts.size() ; i++) {
 			
-			out.print("<div align=\"center\">Wrong account or password!!</div>");		
-			request.getRequestDispatcher("index.jsp").include(request, response);
+			if(accounts.get(i).getAccount().equals(account) && logged_accounts.contains(account)){
+				
+				out.print("<script>alert(" + ERROR.ERR_RE_LOG + ")</script>");
+				
+				request.getRequestDispatcher("index.jsp").include(request, response);
+			}
+				
+			else if(accounts.get(i).getAccount().equals(account) && accounts.get(i).getPassword().equals(password)) {
+				
+				HttpSession session = ((HttpServletRequest) request).getSession();
+				
+				System.out.println("get session id " + session.getId());			
+				logged_accounts.add(account);
+				context.setAttribute("logged_accounts", logged_accounts);
+				session.setAttribute("logged_account", account);
+				chain.doFilter(request, response);	
+			}
+		
+			else {
+				
+				out.print("<div align='center'>" + ERROR.ERR_LOGIN + "</div>");		
+				request.getRequestDispatcher("index.jsp").include(request, response);
+			}
 		}
 	}
 
