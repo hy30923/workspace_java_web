@@ -83,12 +83,15 @@ public class _l02_VerifyAccount implements Filter {
 				chain.doFilter(request, response);	
 			}
 		
-			else {
+			else if(accounts.get(i).getAccount().equals(account) && !accounts.get(i).getPassword().equals(password)){
 				
 				out.print("<div align='center'>" + ERROR.ERR_LOGIN + "</div>");		
 				request.getRequestDispatcher("index.jsp").include(request, response);
 			}
 		}
+		
+		out.print("<div align='center'>" + ERROR.ERR_NOT_VALID_ACCOUNT + "</div>");
+		request.getRequestDispatcher("index.jsp").include(request, response);
 	}
 
 	/**
