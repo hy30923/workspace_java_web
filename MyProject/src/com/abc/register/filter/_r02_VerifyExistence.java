@@ -70,7 +70,7 @@ public class _r02_VerifyExistence implements Filter {
 			request.getRequestDispatcher("register.jsp").include(request, response);
 			return;
 		}
-		
+
 		chain.doFilter(request, response);
 	}
 

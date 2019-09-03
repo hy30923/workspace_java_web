@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-	<title>User Management Application</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<title>User Management Application</title> 
 	<link rel="stylesheet" type="text/css" href="CSS/main.css" />
 </head>
 <body>
@@ -42,7 +43,10 @@
                     	<a href="DeleteServlet?id=<c:out value='${user.id}' />">Delete</a>
                    	</td>
                    	<td>
-                    	<form action="UploadPhotoServlet" method="post" enctype="multipart/form-data"><input name="file" type="file" size="20"><input type="hidden" name="id" value="<c:out value='${user.id}' />"><input type="submit" value="upload" /></form>         	
+                    	<form action="uploadPhoto.jsp" method="post" enctype="multipart/form-data"><input name="file" type="file" size="20">
+	                    	<input type="hidden" name="id" value="<c:out value='${user.id}' />">
+	                    	<input type="submit" value="upload" />
+                    	</form>         	
                     </td>
                 </tr>
             </c:forEach>

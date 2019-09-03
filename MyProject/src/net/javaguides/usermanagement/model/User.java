@@ -16,11 +16,12 @@ public class User {
 	public User() {
 	}
 	
-	public User(String name, String email, String country) {
+	public User(String name, String email, String country, String url) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.country = country;
+		this.url = url;
 	}
 
 	public User(int id, String name, String email, String country) {

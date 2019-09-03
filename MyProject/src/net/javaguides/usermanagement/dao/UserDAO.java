@@ -24,8 +24,8 @@ public class UserDAO {
 	private String jdbcUsername = Config.DB_ACCOUNT;
 	private String jdbcPassword = Config.DB_PASSWORD;
 
-	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, email, country) VALUES "
-			+ " (?, ?, ?);";
+	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, email, country, url) VALUES "
+			+ " (?, ?, ?, ?);";
 
 	private static final String SELECT_USER_BY_ID = "select id,name,email,country from users where id =?";
 	private static final String SELECT_ALL_USERS = "select * from users";
@@ -60,6 +60,7 @@ public class UserDAO {
 			preparedStatement.setString(1, user.getName());
 			preparedStatement.setString(2, user.getEmail());
 			preparedStatement.setString(3, user.getCountry());
+			preparedStatement.setString(4, user.getUrl());
 			System.out.println(preparedStatement);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {

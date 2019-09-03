@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.*;
 
 import javax.servlet.ServletConfig;
@@ -14,7 +15,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -23,6 +26,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 
 import com.abc.config.Config;
+import com.abc.config.ERROR;
+import com.jspsmart.upload.SmartUpload;
+import com.jspsmart.upload.SmartUploadException;
 
 import net.javaguides.usermanagement.dao.UserDAO;
 import net.javaguides.usermanagement.model.User;
@@ -56,6 +62,7 @@ public class UploadPhotoServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    /*
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
@@ -64,6 +71,9 @@ public class UploadPhotoServlet extends HttpServlet {
 		
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
+		
+		//int id = Integer.parseInt(request.getParameter("id"));
+		System.out.println("id: " + request.getParameter("id"));
 		
 		try {
 			
@@ -80,29 +90,10 @@ public class UploadPhotoServlet extends HttpServlet {
 				
 				else {
 					
-					// get stream...  
 					if(item.getName() != null && !item.getName().equals("")) {
 						
-						String strId = null;
-							
-						if("id".equals(item.getName())) {
-							
-							StringBuilder stringBuilder = new StringBuilder();
-							String line = null;
-							
-							try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(item.getInputStream()))){
-								
-								while((line = bufferedReader.readLine()) != null) {
-									
-									stringBuilder.append(line);
-								}
-							}
-							
-							strId = stringBuilder.toString();
-						}
-
-						int id = Integer.parseInt(strId);
-						System.out.println("id: " + id);
+						//int id = Integer.parseInt(strId);
+						//System.out.println("id: " + id);
 						System.out.println("size: " + item.getSize());
 						System.out.println("type: " + item.getContentType());
 						System.out.println("name: " + item.getName());			
@@ -112,9 +103,9 @@ public class UploadPhotoServlet extends HttpServlet {
 						item.write(file);
 						
 						User setUrl = new User();
-						setUrl.setId(id);
-						setUrl.setUrl(savePath + item.getName());
-						userDAO.updateUserUrl(setUrl);
+						//setUrl.setId(id);
+						setUrl.setUrl("uploads/" + item.getName());
+						//userDAO.updateUserUrl(setUrl);
 						
 						out.print("<script>alert('upload success');</script>");
 						request.setAttribute("upload.message", "upload success");
@@ -138,13 +129,38 @@ public class UploadPhotoServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("ListServlet").forward(request, response);
 	}
-
+	*/
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		System.out.println("id: " + request.getParameter("id"));
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		String name = request.getParameter("name");
+		
+		User setUrl = new User();
+		setUrl.setId(id);
+		setUrl.setUrl("uploads/" + name);
+		try {
+			userDAO.updateUserUrl(setUrl);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		request.getRequestDispatcher("ListServlet").forward(request, response);
+    }
+    
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }
