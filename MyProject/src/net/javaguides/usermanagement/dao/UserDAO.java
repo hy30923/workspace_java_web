@@ -32,6 +32,8 @@ public class UserDAO {
 	private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
 	private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =? where id = ?;";
 	
+	private static final String UPDATE_USER_IMG_SQL = "insert into users (id, url) values (?, ?) on duplicate key update url=? ";
+
 	public UserDAO() {
 	}
 
@@ -108,7 +110,8 @@ public class UserDAO {
 				String name = rs.getString("name");
 				String email = rs.getString("email");
 				String country = rs.getString("country");
-				users.add(new User(id, name, email, country));
+				String url = rs.getString("url");
+				users.add(new User(id, name, email, country, url));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -138,6 +141,25 @@ public class UserDAO {
 			rowUpdated = statement.executeUpdate() > 0;
 		}
 		return rowUpdated;
+	}
+	
+	public void updateUserUrl(User user) throws SQLException {
+		
+		try(Connection connection = getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_IMG_SQL);) {
+			
+			preparedStatement.setString(1, Integer.toString(user.getId()));
+			preparedStatement.setString(2, user.getUrl());
+			preparedStatement.setString(3, user.getUrl());
+			
+			System.out.println(preparedStatement);
+			preparedStatement.executeUpdate();
+		}
+		
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 	private void printSQLException(SQLException ex) {

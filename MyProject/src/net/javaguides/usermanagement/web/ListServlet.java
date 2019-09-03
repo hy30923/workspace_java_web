@@ -56,6 +56,11 @@ public class ListServlet extends HttpServlet {
 			System.out.println("in session account " + session.getAttribute("logged_account"));
 			List<User> listUser = userDAO.selectAllUsers();
 			request.setAttribute("listUser", listUser);
+			
+			for(User user : listUser) {
+				System.out.println("id: " + user.getId() + " url: " + user.getUrl());
+			}
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
 			dispatcher.forward(request, response);
 		}

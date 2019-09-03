@@ -11,7 +11,7 @@ public class User {
 	protected String name;
 	protected String email;
 	protected String country;
-	protected String photo;
+	protected String url;
 
 	public User() {
 	}
@@ -29,6 +29,15 @@ public class User {
 		this.name = name;
 		this.email = email;
 		this.country = country;
+	}
+
+	public User(int id, String name, String email, String country, String url) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.country = country;
+		this.url = url;
 	}
 
 	public int getId() {
@@ -55,10 +64,10 @@ public class User {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public String getPhoto() {
-		return photo;
+	public String getUrl() {
+		return url;
 	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }

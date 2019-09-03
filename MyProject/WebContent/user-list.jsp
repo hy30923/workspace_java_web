@@ -32,7 +32,7 @@
             <c:forEach var="user" items="${listUser}">
                 <tr>
                     <td><c:out value="${user.id}" /></td>
-                    <td><img src="../metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MyProject/upload/images/<c:out value='${user.id}' />.jpg" style="weight:100px; height:100px;"></td>
+                    <td><img src="${user.url}" style="weight:100px; height:100px;"></td>
                     <td><c:out value="${user.name}" /></td>
                     <td><c:out value="${user.email}" /></td>
                     <td><c:out value="${user.country}" /></td>

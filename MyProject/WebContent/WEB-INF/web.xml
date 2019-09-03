@@ -24,7 +24,7 @@
 		<servlet-class>net.javaguides.usermanagement.web.UploadPhotoServlet</servlet-class>
 		<init-param>
 			<param-name>savePath</param-name>
-			<param-value>uploads</param-value>
+			<param-value>F:\\workspace_java_web\\MyProject\\WebContent\\uploads</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
