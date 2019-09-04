@@ -43,9 +43,11 @@
                     	<a href="DeleteServlet?id=<c:out value='${user.id}' />">Delete</a>
                    	</td>
                    	<td>
-                    	<form action="uploadPhoto.jsp" method="post" enctype="multipart/form-data"><input name="file" type="file" size="20">
+                    	<form action="uploadPhoto.jsp" method="post" enctype="multipart/form-data">
+                    		<input name="file" type="file" size="20" required />
 	                    	<input type="hidden" name="id" value="<c:out value='${user.id}' />">
 	                    	<input type="submit" value="upload" />
+	                    	<label>Only for English filename</label>
                     	</form>         	
                     </td>
                 </tr>

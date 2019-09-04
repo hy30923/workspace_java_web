@@ -15,7 +15,7 @@
 SmartUpload smart = new SmartUpload();
 smart.initialize(pageContext);
 smart.upload();
-smart.save("C:\\workspace_java_web\\MyProject\\WebContent\\uploads");
+smart.save("uploads");
 String id = smart.getRequest().getParameter("id");
 String name = smart.getFiles().getFile(0).getFileName();
 %>
