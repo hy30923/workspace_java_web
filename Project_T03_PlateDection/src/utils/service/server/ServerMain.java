@@ -1,28 +1,20 @@
+package utils.service.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.Date;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
-import utils.service.server.Server;
+import utils.service.datacontrol.DataControl;
 
 public class ServerMain {
-
-	private int nPorts = 5;
 	
-	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
-		new ServerMain().startServer();
-	}
-	
-	public void startServer() throws Exception {
+	public void startServer(DataControl[] dataControls, int nPorts) throws Exception {
 
 		Thread[] threads = new Thread[nPorts];
 			
 		for(int i = 0 ; i < nPorts ; i++) {
 			
-			threads[i] = new Thread(new PortListeningThread(5000 + i));
+			threads[i] = new Thread(new PortListeningThread(5000 + i, dataControls[i]));
 			threads[i].start();
 		}
 		
@@ -35,12 +27,14 @@ public class ServerMain {
 	public class PortListeningThread implements Runnable {
 		
 		private int port = 0;
-		private ServerSocket serverSocket;
+		private ServerSocket serverSocket = null;
+		private DataControl dataControl = null;
 		
-		public PortListeningThread(int port) {
+		public PortListeningThread(int port, DataControl dataControl) {
 
 			super();
 			this.port = port;
+			this.dataControl = dataControl;
 		}
 		
 		public void run() {
@@ -61,9 +55,9 @@ public class ServerMain {
 				try {
 
 					Socket socket = serverSocket.accept();
-					Thread t = new Thread(new Server(socket, port));
+					Thread t = new Thread(new Server(socket, port, dataControl));
 					t.start();
-					System.out.println("Port " + port + " got a connection");
+					System.out.println("[" + new Date(System.currentTimeMillis()).toString() + "]"+ " Port " + port + " got a connection");
 				} 
 				
 				catch (Exception e) {

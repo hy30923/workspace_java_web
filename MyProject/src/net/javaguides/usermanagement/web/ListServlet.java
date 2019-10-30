@@ -44,26 +44,26 @@ public class ListServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		HttpSession session = request.getSession(false);
+		/*
 		if((String) session.getAttribute("logged_account") == null) {
 			
 			out.print("<script>alert("+ ERROR.ERR_NOT_LOGIN +")</script>");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		
-		else {
+		*/
+		System.out.println("session id " + session.getId());
+		System.out.println("in session account " + session.getAttribute("logged_account"));
+		List<User> listUser = userDAO.selectAllUsers();
+		request.setAttribute("listUser", listUser);
 		
-			System.out.println("session id " + session.getId());
-			System.out.println("in session account " + session.getAttribute("logged_account"));
-			List<User> listUser = userDAO.selectAllUsers();
-			request.setAttribute("listUser", listUser);
-			
-			for(User user : listUser) {
-				System.out.println("id: " + user.getId() + " url: " + user.getUrl());
-			}
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
-			dispatcher.forward(request, response);
+		for(User user : listUser) {
+			System.out.println("id: " + user.getId() + " url: " + user.getUrl());
 		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
+		dispatcher.forward(request, response);
+	
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN/EN" 
+  "http://www.springframework.org/dtd/spring-beans.dtd"> 
+
+<beans>  
+    <bean id="helloBean" 
+          class="onlyfun.caterpillar.HelloBean">
+          <constructor-arg type="java.lang.String">
+          		<value>Justin</value>
+          </constructor-arg>
+          <constructor-arg type="java.lang.Integer">
+          		<value>20</value>
+          </constructor-arg>
+          <constructor-arg type="java.lang.Integer">
+          		<value>100</value>
+          </constructor-arg>
+          <constructor-arg type="int">
+          		<value>50</value>
+          </constructor-arg>
+    </bean>
+</beans>
